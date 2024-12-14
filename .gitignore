@@ -1,0 +1,61 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+db.sqlite3
+*.sqlite3
+*.log
+
+# # Environment variables
+# .env
+# *.env
+
+# Secrets and sensitive configuration files
+secrets.json
+
+# Media and static files
+/media/
+static/
+
+# Django migrations
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Ignore IDE and editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.iml
+
+# macOS system files
+.DS_Store
+
+# Logs and debugging files
+*.log
+*.out
+*.err
+
+# Virtual environment
+venv/
+.env/
+.venv/
+ENV/
+env/
+
+# pipenv and poetry
+Pipfile
+Pipfile.lock
+poetry.lock
+
+# Node modules (if used for frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Other OS-specific files
+Thumbs.db
+desktop.ini

@@ -1,0 +1,40 @@
+services:
+  backend:
+    build:
+      context: ./attendance-backend
+      dockerfile: Dockerfile
+    container_name: django-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./attendance-backend:/app  # Mount backend code for hot reloading
+    env_file:
+      - .env
+    depends_on:
+      - postgres  # Ensure PostgreSQL starts before the backend
+
+  frontend:
+    build:
+      context: ./attendance-frontend
+      dockerfile: Dockerfile
+    container_name: react-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+    - ./attendance-frontend:/app # Mount frontend code for hot reloading
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_attendance_management
+    restart: always
+    environment:
+      POSTGRES_DB: roadcast
+      POSTGRES_USER: sid
+      POSTGRES_PASSWORD: sid
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:  # Global named volume for PostgreSQL
