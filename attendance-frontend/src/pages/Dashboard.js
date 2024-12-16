@@ -131,6 +131,15 @@ const Dashboard = () => {
                   setNewStaff({ ...newStaff, email: e.target.value })
                 }
               />
+              <input
+                type="password"
+                placeholder="Password"
+                value={newStaff.password}
+                onChange={(e) =>
+                  setNewStaff({ ...newStaff, password: e.target.value })
+                }
+                required
+              />
               <select
                 value={newStaff.role}
                 onChange={(e) =>

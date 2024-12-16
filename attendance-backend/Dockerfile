@@ -19,6 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the code
 COPY . .
 
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+
 # Expose the port Django runs on
 EXPOSE 8000
 

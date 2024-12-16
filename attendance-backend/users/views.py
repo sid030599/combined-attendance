@@ -6,7 +6,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
 from .models import User
 from django.contrib.auth import logout
-from users.permissions import IsManager
 from .serializers import UserSerializer, CustomTokenObtainPairSerializer
 
 
