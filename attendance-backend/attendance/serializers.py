@@ -36,7 +36,7 @@ class AttendanceRecordSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         # Use nested serializers for representation
         representation = super().to_representation(instance)
-        representation["image"] = f"http://127.0.0.1:8000/{representation.pop('image')}"
+        representation["image"] = f"http://127.0.0.1:8000{representation.pop('image')}"
         representation["staff"] = UserSerializer(instance.staff).data
         representation["shift"] = ShiftSerializer(instance.shift).data
         return representation
