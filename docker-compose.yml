@@ -42,20 +42,5 @@ services:
     ports:
       - "5432:5432"
 
-  nginx:
-    image: nginx:latest  # Correct image specification
-    container_name: nginx-container
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx-setup.config:/etc/nginx/conf.d/default.conf:ro  # Mount nginx config
-      - ./attendance-frontend/build:/app/attendance-frontend:ro  # Mount the frontend build directory
-      - ./attendance-backend:/app/attendance-backend:ro  # Mount the backend directory (optional if needed for static files)
-      - ./attendance-backend/static:/app/static 
-      - ./media:/app/media
-    depends_on:
-      - backend
-      - frontend
-
 volumes:
   postgres_data:  # Global named volume for PostgreSQL
