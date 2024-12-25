@@ -1,37 +1,28 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=roadcast
+      - POSTGRES_USER=sid
+      - POSTGRES_PASSWORD=sid
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   backend:
-    build: 
-      context: ./attendance-backend
-    container_name: django-backend
-    command: gunicorn attendance_management.wsgi --bind 0.0.0.0:8000
-    restart: always
+    build: ./attendance-backend
     environment:
       - DEBUG=False
     depends_on:
       - postgres
 
   frontend:
-    build:
-      context: ./attendance-frontend
-    container_name: react-frontend
-    restart: always
+    build: ./attendance-frontend
     ports:
       - "80:80"
     depends_on:
       - backend
-
-  postgres:
-    image: postgres:latest
-    container_name: postgres_attendance_management
-    restart: always
-    environment:
-      POSTGRES_DB: roadcast
-      POSTGRES_USER: sid
-      POSTGRES_PASSWORD: sid
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
