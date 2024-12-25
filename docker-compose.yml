@@ -2,35 +2,30 @@ version: '3.8'
 
 services:
   backend:
-    build:
-      context: ./attendance-backend
-      dockerfile: Dockerfile
+    build: ./attendance-backend
     container_name: django-backend
     command: gunicorn attendance_management.wsgi --bind 0.0.0.0:8000
-    ports:
-      - "8000:8000"
+    restart: always
     volumes:
-      - ./attendance-backend:/app  # Mount backend code for hot reloading
       - ./media:/app/media
     env_file:
       - .env
     environment:
       - DEBUG=False
     depends_on:
-      - postgres  # Ensure PostgreSQL starts before the backend
+      - postgres
 
   frontend:
-    build:
-      context: ./attendance-frontend
-      dockerfile: Dockerfile
+    build: ./attendance-frontend
     container_name: react-frontend
+    restart: always
     ports:
-      - "3000:80"
-    volumes:
-      - ./attendance-frontend:/app # Mount frontend code for hot reloading
+      - "80:80"
+    depends_on:
+      - backend
 
   postgres:
-    image: postgres:latest  # Correct image specification
+    image: postgres:latest
     container_name: postgres_attendance_management
     restart: always
     environment:
@@ -39,8 +34,6 @@ services:
       POSTGRES_PASSWORD: sid
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
 
 volumes:
-  postgres_data:  # Global named volume for PostgreSQL
+  postgres_data:
